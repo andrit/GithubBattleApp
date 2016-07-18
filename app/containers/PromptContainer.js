@@ -1,30 +1,47 @@
 var React = require('react');
+var Prompt = require('../components/Prompt');
 
 var PromptContainer = React.createClass({
-    render: function(){
-        console.log(this);
-        return(
-        <div className="jumbotron col-sm-6 col-sm-offset-3 text-center">
-            <h1>Header Text</h1>
-            <div className="col-sm-12">
-                <form action="">
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Github Username" />
-                    </div>
-                    <div className="form-group col-sm-4 col-sm-offset-4">
-                        <button
-                            className="btn btn-block btn-success"
-                            type="submit">
-                                Continue
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-            );
+    contextTypes: {
+        router: React.PropTypes.object.isRequired
+    },
+    getInitialState: function () {
+        return {
+            username: ''
+        }
+    },
+    handleSubmitUser: function (e) {
+        e.preventDefault();
+        var username = this.state.username;
+        this.setState({
+            username: ''
+        });
+
+        if (this.props.routeParams.playerOne) {
+            this.context.router.push({
+                pathname: '/battle',
+                query: {
+                    playerOne: this.props.routeParams.playerOne,
+                    playerTwo: this.state.username,
+                }
+            })
+        } else {
+            this.context.router.push('/playerTwo/' + this.state.username)
+        }
+    },
+    handleUpdateUser: function (event) {
+        this.setState({
+            username: event.target.value
+        });
+    },
+    render: function () {
+        return (
+            <Prompt
+                onSubmitUser={this.handleSubmitUser}
+                onUpdateUser={this.handleUpdateUser}
+                header={this.props.route.header}
+                username={this.state.username} />
+        )
     }
 });
 
