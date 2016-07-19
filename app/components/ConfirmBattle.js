@@ -1,12 +1,10 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var styles = require('../styles');
+var ReactRouter = require('react-router');
 var Link = require('react-router').Link;
 var UserDetails = require('./UserDetails');
 
-function puke(object){
-    return<pre>{JSON.stringify(object, null, ' ')}</pre>
-}
 
 function ConfirmBattle (props) {
     return props.isLoading === true
