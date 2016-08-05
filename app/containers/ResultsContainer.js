@@ -1,8 +1,6 @@
 var React = require('react');
 var Results = require('../components/Results');
 var githubHelpers = require('../utils/githubHelpers');
-var resultscontainer = require('../containers/ResultsContainer');  //a redundancy
-var resultscontainerstyles = require('../styles/${style-template-react-component}');
 
 
 
